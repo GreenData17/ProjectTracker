@@ -1,0 +1,72 @@
+﻿<Window x:Class="Project_Tracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Tracker"
+        xmlns:viewModel="clr-namespace:Project_Tracker.MVM.ViewModel"
+        mc:Ignorable="d"
+        Title="Project Tracker" Height="600" Width="1100">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid Background="#ccffcc">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- TopBar -->
+        <Grid HorizontalAlignment="Stretch"
+              Background="#2a9f25">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+
+                <Button Content="Home"
+                        Width="60"
+                        Height="35"
+                        Margin="5"
+                        FontSize="16"
+                        Foreground="White"
+                        Background="#19b710"
+                        Style="{StaticResource 3dButton}"
+                        Command="{Binding HomeViewCommand}"/>
+
+                <Button Content="Create"
+                        Width="60"
+                        Height="35"
+                        Margin="5"
+                        FontSize="16"
+                        Foreground="White"
+                        Background="#19b710"
+                        Style="{StaticResource 3dButton}"
+                        Command="{Binding CreationViewCommand}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+
+                <TextBox Height="30"
+                         Width="200"
+                         FontSize="16"
+                         Style="{StaticResource roundedSearchTextbox}"/>
+
+                <Button Content="⚙"
+                        Width="40"
+                        Height="40"
+                        Margin="5"
+                        FontSize="16"
+                        Foreground="White"
+                        Background="#19b710"
+                        Style="{StaticResource 3dButton}"/>
+
+            </StackPanel>
+            
+        </Grid>
+
+        <ContentControl Grid.Row="1"
+                        Content="{Binding CurrentView}"/>
+
+    </Grid>
+</Window>

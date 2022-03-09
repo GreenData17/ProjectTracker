@@ -1,0 +1,34 @@
+﻿<Application x:Class="Project_Tracker.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Project_Tracker"
+             xmlns:viewModel="clr-namespace:Project_Tracker.MVM.ViewModel"
+             xmlns:view="clr-namespace:Project_Tracker.MVM.View"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="./Theme/3dButtonTheme.xaml"/>
+                <ResourceDictionary Source="./Theme/ProjectCardTheme.xaml"/>
+                <ResourceDictionary Source="./Theme/RoundedTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="./Theme/RoundedSearchTextBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ProjectViewModel}">
+                <view:ProjectView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CreationViewModel}">
+                <view:CreationView/>
+            </DataTemplate>
+
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

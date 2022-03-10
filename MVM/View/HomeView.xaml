@@ -8,20 +8,20 @@
              d:DesignHeight="400" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="1100"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Background="#19b710"/>
-        <Grid Grid.Column="2" Background="#19b710"/>
+        <Grid Grid.Column="0"/><!--Background="#19b710"/>-->
+        <Grid Grid.Column="2"/><!--Background="#19b710"/>-->
 
         <Grid Grid.Column="1">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
-                    <Label Content="Last Opened"/>
-                    <ListView ItemsSource="{Binding ProjectCards}"
-                              SelectedItem="{Binding SelectedProjectCard}"
+                    <Label Content="Last opened" FontSize="20" FontWeight="Black" Margin="0,10,0,0"/>
+                    <ListView ItemsSource="{Binding LatestProjectCards}"
+                              SelectedItem="{Binding SelectedLatestProjectCard}"
                               Background="Transparent"
                               BorderThickness="0"
                               Grid.Row="1"
@@ -32,9 +32,9 @@
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                     </ListView>
-                    <Label Content="Favorites" Margin="0,50,0,0"/>
-                    <ListView ItemsSource="{Binding ProjectCards}"
-                              SelectedItem="{Binding SelectedProjectCard}"
+                    <Label Content="Favorites" FontSize="20" FontWeight="Black" Margin="0,10,0,0"/>
+                    <ListView ItemsSource="{Binding FavProjectCards}"
+                              SelectedItem="{Binding SelectedFavProjectCard}"
                               Background="Transparent"
                               BorderThickness="0"
                               Grid.Row="1"
@@ -45,9 +45,9 @@
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
                     </ListView>
-                    <Label Content="All" Margin="0,50,0,0"/>
-                    <ListView ItemsSource="{Binding ProjectCards}"
-                              SelectedItem="{Binding SelectedProjectCard}"
+                    <Label Content="All" FontSize="20" FontWeight="Black" Margin="0,10,0,0"/>
+                    <ListView ItemsSource="{Binding AllProjectCards}"
+                              SelectedItem="{Binding SelectedAllProjectCard}"
                               Background="Transparent"
                               BorderThickness="0"
                               Grid.Row="1"

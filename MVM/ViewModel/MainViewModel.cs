@@ -1,9 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Threading.Tasks;
+using System.Text.Json;
 using Project_Tracker.Core;
 using Project_Tracker.MVM.Model;
 
@@ -14,7 +17,7 @@ namespace Project_Tracker.MVM.ViewModel
         public static MainViewModel instance { get; set; }
 
         // Models //
-
+        public static List<ProjectModel> loadedProjects = new List<ProjectModel>();
 
         // Commands //
         public RelayCommand HomeViewCommand { get; set; }
@@ -37,8 +40,6 @@ namespace Project_Tracker.MVM.ViewModel
             }
         }
 
-
-
         public MainViewModel()
         {
             instance = this;
@@ -57,6 +58,26 @@ namespace Project_Tracker.MVM.ViewModel
             {
                 CurrentView = new CreationViewModel();
             });
+
+
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\data")) 
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\data");
+
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\data\projects")) 
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\data\projects");
+
+            LoadProjectList();
+        }
+
+        public static void LoadProjectList()
+        {
+            loadedProjects = new List<ProjectModel>();
+            foreach (string s in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\data\projects"))
+            {
+                string input = File.ReadAllText(s);
+
+                loadedProjects.Add(JsonSerializer.Deserialize<ProjectModel>(input));
+            }
         }
     }
 }

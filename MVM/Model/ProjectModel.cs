@@ -11,14 +11,16 @@ namespace Project_Tracker.MVM.Model
     {
         // General //
         public string Name { get; set; }
+        public string Description { get; set; }
         public string Color { get; set; }
+        public bool Favorite { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime LastChangeTime { get; set; }
 
         // Progress //
-
-        public string[] Title { get; set; }
-        public string[] Description { get; set; }
+        public string[] SectionName { get; set; }
+        public string[] CardTitle { get; set; }
+        public string[] CardDescription { get; set; }
 
         public int Importance { get; set; } //0=normal 1=importand 2=urgend 3=Emergency 
 

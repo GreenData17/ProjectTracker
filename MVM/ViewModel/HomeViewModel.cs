@@ -11,47 +11,79 @@ namespace Project_Tracker.MVM.ViewModel
 {
     class HomeViewModel : ObservableObject
     {
-        public ObservableCollection<ProjectModel> ProjectCards { get; set; }
+        public ObservableCollection<ProjectModel> FavProjectCards { get; set; }
+        public ObservableCollection<ProjectModel> AllProjectCards { get; set; }
+        public ObservableCollection<ProjectModel> LatestProjectCards { get; set; }
 
-        private ProjectModel m_SelectedProjectCard;
+        private ProjectModel m_SelectedFavProjectCard;
+        private ProjectModel m_SelectedAllProjectCard;
+        private ProjectModel m_SelectedLatestProjectCard;
 
-        public ProjectModel SelectedProjectCard
+        public ProjectModel SelectedFavProjectCard
         {
-            get { return m_SelectedProjectCard; }
+            get { return m_SelectedFavProjectCard; }
             set
             {
-                m_SelectedProjectCard = value;
+                m_SelectedFavProjectCard = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ProjectModel SelectedAllProjectCard
+        {
+            get { return m_SelectedAllProjectCard; }
+            set
+            {
+                m_SelectedAllProjectCard = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ProjectModel SelectedLatestProjectCard
+        {
+            get { return m_SelectedLatestProjectCard; }
+            set
+            {
+                m_SelectedLatestProjectCard = value;
                 OnPropertyChanged();
             }
         }
 
         public HomeViewModel()
         {
-            ProjectCards = new ObservableCollection<ProjectModel>();
+            MainViewModel.LoadProjectList();
 
-            ProjectCards.Add(new ProjectModel
-            {
-                Name = "Project 1",
-                Color = "#ffb759"
-            });
+            LatestProjectCards = new ObservableCollection<ProjectModel>();
+            FavProjectCards = new ObservableCollection<ProjectModel>();
+            AllProjectCards = new ObservableCollection<ProjectModel>();
 
-            ProjectCards.Add(new ProjectModel
-            {
-                Name = "Project 2",
-                Color = "#59f1ff"
-            });
 
-            ProjectCards.Add(new ProjectModel
-            {
-                Name = "Project 3",
-                Color = "#f959ff"
-            });
 
-            ProjectCards.Add(new ProjectModel
+            List<ProjectModel> temp = new List<ProjectModel>();
+            foreach (ProjectModel pm in MainViewModel.loadedProjects)
             {
-                Name = "Project 4",
-                Color = "#f959ff"
-            });
+                temp.Add(pm);
+            }
+            temp.Sort((x, y) => DateTime.Compare(x.LastChangeTime, y.LastChangeTime));
+            foreach (ProjectModel pm in temp)
+            {
+                LatestProjectCards.Add(pm);
+            }
+
+
+
+            foreach (ProjectModel pm in MainViewModel.loadedProjects)
+            {
+                AllProjectCards.Add(pm);
+            }
+
+
+
+            foreach (ProjectModel pm in MainViewModel.loadedProjects)
+            {
+                if(pm.Favorite)
+                    FavProjectCards.Add(pm);
+            }
         }
     }
 }

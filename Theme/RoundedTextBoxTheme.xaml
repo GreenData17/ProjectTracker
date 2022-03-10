@@ -14,10 +14,11 @@
                             <TextBox VerticalAlignment="Stretch"
                                      VerticalContentAlignment="Top"
                                      HorizontalAlignment="Stretch"
-                                     x:Name="MessageBox"
+                                     x:Name="InputBox"
                                      Background="White"
                                      TextWrapping="Wrap"
                                      BorderThickness="0"
+                                     Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      FontSize="{TemplateBinding FontSize}"
                                      Foreground="Black"
                                      CaretBrush="Gray"
@@ -35,7 +36,7 @@
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=MessageBox}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=InputBox}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Project_Tracker"
         xmlns:viewModel="clr-namespace:Project_Tracker.MVM.ViewModel"
         mc:Ignorable="d"
-        Title="Project Tracker" Height="600" Width="1100">
+        Title="Project Tracker" Height="700" Width="1100">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>

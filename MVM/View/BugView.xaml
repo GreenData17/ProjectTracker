@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Project_Tracker.MVM.View.BugView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_Tracker.MVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel>
+            <Border Background="#CCCCCC" CornerRadius="5">
+                <Border Background="#FFFFFF" CornerRadius="5">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="ID" FontSize="16" Margin="10,0,5,0"/>
+                            <Border Width="1" Background="#888888" Margin="0,1,0,1"/>
+                            <TextBlock Text="Description" FontSize="16" Margin="5,0,450,0"/>
+                            <Border Width="1" Background="#888888" Margin="0,1,0,1"/>
+                            <TextBlock Text="Importance" FontSize="16" Margin="5,0,30,0"/>
+                            <Border Width="1" Background="#888888" Margin="0,1,0,1"/>
+                            <TextBlock Text="CreationDate" FontSize="16" Margin="5,0,5,0"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <Border>
+                                <TextBlock FontSize="16" Margin="10,0,0,0"
+                                           Text="0    Testing the view!                                                                                                medium             22.03.2022"/>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+
+                </Border>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

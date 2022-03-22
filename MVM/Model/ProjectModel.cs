@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project_Tracker.MVM.Model
 {
-    class ProjectModel
+    public class ProjectModel
     {
         // General //
         public string Name { get; set; }

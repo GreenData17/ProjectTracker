@@ -28,6 +28,7 @@ namespace Project_Tracker.MVM.ViewModel
 
         // events //
 
+        // vars //
         private object m_CurrentView;
 
         public object CurrentView
@@ -63,16 +64,13 @@ namespace Project_Tracker.MVM.ViewModel
             if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\data")) 
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\data");
 
-            if (!Directory.Exists(Directory.GetCurrentDirectory() + @"\data\projects")) 
-                Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\data\projects");
-
             LoadProjectList();
         }
 
         public static void LoadProjectList()
         {
             loadedProjects = new List<ProjectModel>();
-            foreach (string s in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\data\projects"))
+            foreach (string s in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\data"))
             {
                 string input = File.ReadAllText(s);
 

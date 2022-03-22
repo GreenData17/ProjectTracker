@@ -64,9 +64,9 @@ namespace Project_Tracker.MVM.ViewModel
 
             string output = JsonSerializer.Serialize(data);
 
-            File.WriteAllText(@$"{Directory.GetCurrentDirectory()}\data\projects\{ProjectName}.json", output);
+            File.WriteAllText(@$"{Directory.GetCurrentDirectory()}\data\{ProjectName}.json", output);
 
-            if (File.Exists(@$"{Directory.GetCurrentDirectory()}\data\projects\{ProjectName}.json"))
+            if (File.Exists(@$"{Directory.GetCurrentDirectory()}\data\{ProjectName}.json"))
                 MainViewModel.instance.CurrentView = new HomeViewModel();
         }
     }

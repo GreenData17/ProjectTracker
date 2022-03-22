@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Project_Tracker.Core;
 using Project_Tracker.MVM.Model;
+using Project_Tracker.MVM.View;
 
 namespace Project_Tracker.MVM.ViewModel
 {
@@ -25,6 +26,7 @@ namespace Project_Tracker.MVM.ViewModel
             set
             {
                 m_SelectedFavProjectCard = value;
+                OpenProject(value);
                 OnPropertyChanged();
             }
         }
@@ -35,6 +37,7 @@ namespace Project_Tracker.MVM.ViewModel
             set
             {
                 m_SelectedAllProjectCard = value;
+                OpenProject(value);
                 OnPropertyChanged();
             }
         }
@@ -45,6 +48,7 @@ namespace Project_Tracker.MVM.ViewModel
             set
             {
                 m_SelectedLatestProjectCard = value;
+                OpenProject(value);
                 OnPropertyChanged();
             }
         }
@@ -57,7 +61,7 @@ namespace Project_Tracker.MVM.ViewModel
             FavProjectCards = new ObservableCollection<ProjectModel>();
             AllProjectCards = new ObservableCollection<ProjectModel>();
 
-
+            // -- -- //
 
             List<ProjectModel> temp = new List<ProjectModel>();
             foreach (ProjectModel pm in MainViewModel.loadedProjects)
@@ -70,20 +74,26 @@ namespace Project_Tracker.MVM.ViewModel
                 LatestProjectCards.Add(pm);
             }
 
-
+            // -- -- //
 
             foreach (ProjectModel pm in MainViewModel.loadedProjects)
             {
                 AllProjectCards.Add(pm);
             }
 
-
+            // -- -- //
 
             foreach (ProjectModel pm in MainViewModel.loadedProjects)
             {
                 if(pm.Favorite)
                     FavProjectCards.Add(pm);
             }
+        }
+
+        void OpenProject(ProjectModel project)
+        {
+            AppManager.openProject = project;
+            MainViewModel.instance.CurrentView = new ProjectView();
         }
     }
 }

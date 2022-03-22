@@ -27,7 +27,23 @@
                 <view:CreationView/>
             </DataTemplate>
 
+            <!-- projectView -->
 
+            <DataTemplate DataType="{x:Type viewModel:OverviewViewModel}">
+                <view:OverviewView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ProgressViewModel}">
+                <view:ProgressView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:BugViewModel}">
+                <view:BugView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ProjectSettingsViewModel}">
+                <view:ProjectSettingsView/>
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

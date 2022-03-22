@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Project_Tracker.MVM.View"
+             xmlns:local="clr-namespace:Project_Tracker.MVM.View" 
+             xmlns:viewmodel="clr-namespace:Project_Tracker.MVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ProjectViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="420" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewmodel:ProjectViewModel/>
+    </UserControl.DataContext>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -18,14 +23,22 @@
                 <Label Content="Menu"/>
                 <RadioButton Content="Overview"
                              IsChecked="True"
-                             Style="{StaticResource MenuButton}"/>
+                             Style="{StaticResource MenuButton}"
+                             Command="{Binding OverviewViewCommand}"/>
                 <RadioButton Content="Progress"
-                             Style="{StaticResource MenuButton}"/>
+                             Style="{StaticResource MenuButton}"
+                             Command="{Binding ProgressViewCommand}"/>
                 <RadioButton Content="Bugs"
-                             Style="{StaticResource MenuButton}"/>
+                             Style="{StaticResource MenuButton}"
+                             Command="{Binding BugViewCommand}"/>
                 <RadioButton Content="Settings"
-                             Style="{StaticResource MenuButton}"/>
+                             Style="{StaticResource MenuButton}"
+                             Command="{Binding SettingsViewCommand}"/>
             </StackPanel>
         </Grid>
+
+        <ContentControl Grid.Column="1"
+                        Content="{Binding CurrentView}"/>
+
     </Grid>
 </UserControl>

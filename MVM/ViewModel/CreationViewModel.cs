@@ -60,6 +60,8 @@ namespace Project_Tracker.MVM.ViewModel
                 Favorite = false,
                 CreationTime = DateTime.Now,
                 LastChangeTime = DateTime.Now,
+                SectionNames = new string[] {"Tasks", "In_Progress", "Done"},
+                Cards = new CardModel[] { new CardModel() { title = "New Task", parentSection = "Tasks", id = 0} }
             };
 
             string output = JsonSerializer.Serialize(data);

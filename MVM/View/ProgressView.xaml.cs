@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Project_Tracker.Core;
+using Project_Tracker.MVM.Model;
+using Project_Tracker.MVM.ViewModel;
 
 namespace Project_Tracker.MVM.View
 {
@@ -20,9 +23,145 @@ namespace Project_Tracker.MVM.View
     /// </summary>
     public partial class ProgressView : UserControl
     {
+        public List<StackPanel> sectionStackpanels = new List<StackPanel>();
+        public List<CardModel> cards = new List<CardModel>();
+
         public ProgressView()
         {
             InitializeComponent();
+            Setup();
+        }
+
+        public void SaveProject()
+        {
+            // <Save Sections>
+            List<string> temp = new List<string>();
+
+            foreach(StackPanel panel in sectionStackpanels)
+            {
+                temp.Add(panel.Name.Replace("section_", ""));
+            }
+            AppManager.openProject.SectionNames = temp.ToArray();
+
+
+            // <Save Cards>
+            AppManager.openProject.Cards = cards.ToArray();
+            AppManager.SaveProject();
+
+            Reload();
+        }
+
+        public void Reload()
+        {
+            ProjectViewModel.instance.ProgressViewCommand.Execute(null);
+        }
+
+        public void Setup()
+        {
+            LoadSections(); // Read sections names in project file and load them into the project view.
+            LoadCards(); // Read cards parent names in project file and load them into the section.
+
+            AddNewCardButton(); // Create a "new Card" button and add it to the end of the section.
+
+                // Add "Add Section" butten at the end of the sections.
+                Button btt = new Button() { Style = FindResource("NewSectionButton") as Style };
+            Sections.Children.Add(btt);
+        }
+
+        private void LoadSections() // Create Sections
+        {
+            if (AppManager.openProject.SectionNames is null) return;
+
+            foreach (string s in AppManager.openProject.SectionNames)
+            {
+                // == Load-in Sections from project files. ==
+                Border temp = new Border();
+                StackPanel tempPanel = new StackPanel() { Name = "section_" + s };
+
+                // Setup Section theme //
+                temp.CornerRadius = new CornerRadius(10);
+                temp.Background = new SolidColorBrush(Colors.White);
+                temp.VerticalAlignment = VerticalAlignment.Top;
+                temp.Height = 570;
+                temp.Width = 150;
+                temp.Margin = new Thickness(5, 0, 5, 0);
+                temp.Child = tempPanel;
+
+                // Add Section Title
+                tempPanel.Children.Add(new TextBlock() { Text = s, Margin = new Thickness(10), FontWeight = FontWeights.Bold, FontSize = 14 });
+                // Add Section name seperator
+                tempPanel.Children.Add(new Border() { CornerRadius = new CornerRadius(10), Height = 2, Width = 140, Margin = new Thickness(5, 0, 5, 0), Background = new SolidColorBrush(Colors.LightGray) });
+
+                // view the section
+                Sections.Children.Add(temp);
+                // add reference to sectionStackPanels
+                sectionStackpanels.Add(tempPanel);
+            }
+        }
+
+        private void LoadCards() // Create cards
+        {
+            foreach (CardModel card in AppManager.openProject.Cards) // get cards from file
+            {
+                foreach (StackPanel panel in sectionStackpanels) // get loaded sections
+                {
+                    if ("section_" + card.parentSection == panel.Name) // search the parent section
+                    {
+                        Button temp = new Button()
+                        {
+                            Content = card.title,
+                            FontSize = 12,
+                            VerticalAlignment = VerticalAlignment.Top,
+                            HorizontalAlignment = HorizontalAlignment.Left,
+                            Height = 50,
+                            Width = 140,
+                            Margin = new Thickness(5, 5, 5, 0),
+                            Style = this.FindResource("CardButton") as Style,
+                        };
+
+                        panel.Children.Add(temp); // add card to the section
+                        cards.Add(card);
+                    }
+                }
+            }
+        }
+
+        private void AddNewCardButton() // Create "new card" button
+        {
+            foreach (StackPanel panel in sectionStackpanels)
+            {
+                Button temp = new Button()
+                {
+                    Content = "Add new Card",
+                    FontSize = 12,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Height = 20,
+                    Width = 120,
+                    Margin = new Thickness(5, 5, 5, 0),
+                };
+
+                temp.Click += AddNewCard; // Button Click event
+
+                panel.Children.Add(temp);
+            }
+        }
+
+        // creates a new button and reloads the project view.
+        private void AddNewCard(object sender, RoutedEventArgs e)
+        {
+            Button temp = sender as Button;
+            StackPanel temppanel = temp.Parent as StackPanel;
+
+            CardModel card = new CardModel()
+            {
+                title = "New Card",
+                parentSection = temppanel.Name.ToString().Replace("section_", ""),
+                id = (uint)cards.Count - 1,
+            };
+
+            cards.Add(card);
+            SaveProject();
         }
     }
 }

@@ -13,6 +13,8 @@
                 <ResourceDictionary Source="./Theme/ProjectCardTheme.xaml"/>
                 <ResourceDictionary Source="./Theme/RoundedTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="./Theme/RoundedSearchTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="./Theme/NewSectionButtonTheme.xaml"/>
+                <ResourceDictionary Source="./Theme/CardButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">

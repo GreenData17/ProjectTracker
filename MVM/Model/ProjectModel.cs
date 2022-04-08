@@ -17,23 +17,15 @@ namespace Project_Tracker.MVM.Model
         public DateTime CreationTime { get; set; }
         public DateTime LastChangeTime { get; set; }
 
-        // Progress //
-        public string[] SectionName { get; set; }
-        public string[] CardTitle { get; set; }
-        public string[] CardDescription { get; set; }
 
-        public int Importance { get; set; } //0=normal 1=importand 2=urgend 3=Emergency 
+        // Progress //
+        public string[] SectionNames { get; set; }
+        public CardModel[] Cards { get; set; }
+
 
         public string[] TagNames { get; set; }
         public string[] TagColor { get; set; }
-        public int TagSelected { get; set; }
 
         public string[] ProgressStateName { get; set; }
-        public int ProgressState { get; set; }
-
-        public string[] ChecklistNames { get; set; }
-        public bool[] ChecklistCheckBox { get; set; }
-
-        public string[] PictureFilePath { get; set; }
     }
 }

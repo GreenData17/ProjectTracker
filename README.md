@@ -1,7 +1,14 @@
 # ProjectTracker
 A program to track your progress in a project.
 
-> this project is not at a state, that can be shown yet. -_-"
+### Project Selection Menu
+![ProjectMenuView](https://raw.githubusercontent.com/GreenData17/ProjectTracker/main/pictures/Project_Selection.png)
+
+### Project Planner
+![ProjectPlannerView](https://github.com/GreenData17/ProjectTracker/blob/main/pictures/Planner_view.png?raw=true)
+
+### Card Edit
+![CardEditView](https://github.com/GreenData17/ProjectTracker/blob/main/pictures/Card_Edit_View.png?raw=true)
 
 ​
 

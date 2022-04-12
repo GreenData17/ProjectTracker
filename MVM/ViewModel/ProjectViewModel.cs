@@ -17,6 +17,7 @@ namespace Project_Tracker.MVM.ViewModel
         public RelayCommand ProgressViewCommand { get; set; }
         public RelayCommand BugViewCommand { get; set; }
         public RelayCommand SettingsViewCommand { get; set; }
+        public RelayCommand CardEditViewCommand { get; set; }
 
         // vars //
         private object m_CurrentView;
@@ -55,6 +56,11 @@ namespace Project_Tracker.MVM.ViewModel
             SettingsViewCommand = new RelayCommand(o =>
             {
                 CurrentView = new ProjectSettingsView();
+            });
+
+            CardEditViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = new CardEditView();
             });
         }
     }

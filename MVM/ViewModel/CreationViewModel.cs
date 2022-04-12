@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Project_Tracker.Core;
 using Project_Tracker.MVM.Model;
 using System.Text.Json;
+using System.Windows;
 
 namespace Project_Tracker.MVM.ViewModel
 {
@@ -60,16 +61,53 @@ namespace Project_Tracker.MVM.ViewModel
                 Favorite = false,
                 CreationTime = DateTime.Now,
                 LastChangeTime = DateTime.Now,
-                SectionNames = new string[] {"Tasks", "In_Progress", "Done"},
-                Cards = new CardModel[] { new CardModel() { title = "New Task", parentSection = "Tasks", id = 0} }
+
+                Sections = new SectionModel[]
+                {
+                    new SectionModel()
+                    {
+                        Name = "Tasks",
+                        Cards = new List<CardModel>() 
+                        { 
+                            new CardModel() { title = "New Card", SectionID = 0} 
+                        }
+                    },
+                    new SectionModel()
+                    {
+                        Name = "In_Progress",
+                        Cards = new List<CardModel>() { }
+                    },
+                    new SectionModel()
+                    {
+                        Name = "Finished",
+                        Cards = new List<CardModel>() { }
+                    }
+                }
             };
 
             string output = JsonSerializer.Serialize(data);
 
-            File.WriteAllText(@$"{Directory.GetCurrentDirectory()}\data\{ProjectName}.json", output);
+            try
+            {
+                File.WriteAllText(@$"{Directory.GetCurrentDirectory()}\data\{ProjectName}.json", output);
+            
 
-            if (File.Exists(@$"{Directory.GetCurrentDirectory()}\data\{ProjectName}.json"))
-                MainViewModel.instance.CurrentView = new HomeViewModel();
+                if (File.Exists(@$"{Directory.GetCurrentDirectory()}\data\{ProjectName}.json"))
+                    MainViewModel.instance.CurrentView = new HomeViewModel();
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("denied"))
+                {
+                    MessageBox.Show("Illegal File Name!", "File Creation Error!");
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "File Creation Error!");
+                }
+
+            }
         }
     }
 }

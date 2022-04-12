@@ -47,6 +47,10 @@
                 <view:ProjectSettingsView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:CardEditViewModel}">
+                <view:CardEditView/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

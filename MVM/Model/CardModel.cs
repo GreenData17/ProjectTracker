@@ -13,9 +13,7 @@ namespace Project_Tracker.MVM.Model
         public string description { get; set; }
         public string color { get; set; }
         public string picturePath { get; set; }
-
-        public uint id { get; set; }
-        public string parentSection { get; set; }
+        public int SectionID { get; set; }
 
 
         // States //

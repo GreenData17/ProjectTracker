@@ -12,6 +12,8 @@ namespace Project_Tracker.Core
     public class AppManager { 
 
         public static ProjectModel openProject;
+        public static int openSection;
+        public static int openCard;
 
         public static void SaveProject()
         {

@@ -9,7 +9,7 @@ namespace Project_Tracker.MVM.Model
 {
     public class ProjectModel
     {
-        // General //
+        // <General>
         public string Name { get; set; }
         public string Description { get; set; }
         public string Color { get; set; }
@@ -18,14 +18,13 @@ namespace Project_Tracker.MVM.Model
         public DateTime LastChangeTime { get; set; }
 
 
-        // Progress //
-        public string[] SectionNames { get; set; }
-        public CardModel[] Cards { get; set; }
-
+        // <Progress>
+        public SectionModel[] Sections { get; set; }
 
         public string[] TagNames { get; set; }
         public string[] TagColor { get; set; }
 
-        public string[] ProgressStateName { get; set; }
+        public string[] ProgressStateNames { get; set; }
+        public string[] ProgressStateColors { get; set; }
     }
 }
